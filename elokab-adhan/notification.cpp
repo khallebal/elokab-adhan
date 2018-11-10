@@ -98,7 +98,7 @@ NotificationForm::NotificationForm(QWidget *parent) :
 }
 NotificationForm::~NotificationForm()
 {
-    #ifdef USE_MEDIA
+#ifdef USE_MEDIA
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
 delete mediaPlayer;
 #endif
@@ -116,7 +116,7 @@ void NotificationForm::loadSettings()
     m_notificationUi.enableSoundCheckBox->setChecked(cg.value("athanSoundEnabled", true).toBool());
     m_notificationUi.enableDuaaCheckBox->setChecked(cg.value("duaaSoundEnabled", false).toBool());
 
-#ifdef USE_MEDIA {
+#ifdef USE_MEDIA
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
 
     mediaPlayer->setVolume(cg.value("soundVolume", 100).toInt());
@@ -372,13 +372,13 @@ bool NotificationForm::duaaSoundEnabled()
 
 qreal NotificationForm::soundVolume()
 {
-    #ifdef USE_MEDIA
-   #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+#ifdef USE_MEDIA
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
   return mediaPlayer->volume();
-   #else
+#else
       return audioOutput->volume();
-   #endif
-   #endif
+#endif
+#endif
 }
 
 bool NotificationForm::notifyBeforeAthan()
