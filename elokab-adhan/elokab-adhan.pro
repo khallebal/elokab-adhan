@@ -99,9 +99,26 @@ RESOURCES += \
     images.qrc
 
 #INSTALL Linux
+!haiku {
  target.path = /usr/bin
  data.files=../usr/share/*
  data.path=/usr/share
  INSTALLS +=    target \
                           data
-             
+}
+else:haiku {
+	isEmpty(PREFIX) {
+		PREFIX = /boot/home/config/non-packaged/apps/Elokab-adhan
+	}
+	BINDIR = $$PREFIX
+	DATADIR = $$PREFIX/data
+	TRANSDIR = $$PREFIX/translations
+
+	target.path =$$BINDIR
+	data.files =../usr/share/elokab/elokab-adhan/data/*
+	data.path=$$DATADIR
+	translations.files =../usr/share/elokab/translations/*
+	translations.path=$$TRANSDIR
+INSTALLS += target data translations
+}
+
